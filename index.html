@@ -405,31 +405,31 @@
     A: {
       name: 'Heavy Hitters',
       exercises: [
-        'Goblet Squat (4×10-12, slow 3s descent)',
+        'Bulgarian Split Squat (4×8/leg)',
         'Floor Press (4×10-12)',
-        'Romanian Deadlift (4×12)',
-        'Single-Arm Row (3×10/side)',
-        'Dumbbell Shrug (3×15)'
+        'Single-Leg RDL (3×10/leg)',
+        'Goblet Squat (3×12, 3s descent)',
+        'Push-Up, backpack loaded (3×AMRAP)'
       ]
     },
     B: {
       name: 'The Burn',
       exercises: [
+        'DB Thruster (4×12)',
+        'Lateral Raise (3×15, 3s lower)',
         'Alt. Reverse Lunge (3×12/leg)',
-        'Overhead Press (3×12-15)',
         'Curl + Overhead Tricep Ext. (3×10)',
-        'Lateral Raise (3×15, strict)',
-        'Weighted Glute Bridge (3×20)'
+        'Single-Leg Glute Bridge (3×15/leg)'
       ]
     },
     C: {
       name: 'Athletic & Core',
       exercises: [
-        'Thruster (3×12)',
         'Renegade Row (3×10/side, no push-up)',
-        'Farmers Carry (3×45s)',
-        'Sumo Squat (3×15)',
-        'Weighted Dead Bug (3×10/side)'
+        'DB Swing (3×15)',
+        'Backpack Squat Jump (3×8)',
+        'Weighted Dead Bug (3×10/side)',
+        'Farmers Carry, heavy (3×45s)'
       ]
     }
   };
@@ -552,8 +552,9 @@
       const last = getLastSession(currentWorkout, name);
       let hint = '';
       if (last) {
-        const nextReps = parseInt(last.reps) + 1;
-        hint = `<div class="overload-hint">Last: ${last.reps} reps @ ${last.weight}${last.unit} — try ${nextReps} reps today!</div>`;
+        const weightStep = useKg ? 1 : 2.5;
+        const nextWeight = (parseFloat(last.weight) + weightStep).toFixed(1).replace(/\.0$/, '');
+        hint = `<div class="overload-hint">Last: ${last.sets}×${last.reps} @ ${last.weight}${last.unit} — if you hit all reps clean, try ${nextWeight}${last.unit} today.</div>`;
       }
       return `
         <div class="exercise-card">
