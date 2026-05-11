@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Duolingo-inspired palette */
     --bg: #131f24;
     --bg2: #1c2b32;
     --surface: #202f36;
@@ -17,11 +16,11 @@
     --border: #37464f;
     --border-light: #4b6470;
 
-    --primary: #58cc02;        /* Duolingo green */
-    --primary-dark: #4caf00;   /* button shadow */
+    --primary: #58cc02;
+    --primary-dark: #4caf00;
     --primary-text: #fff;
 
-    --secondary: #1cb0f6;      /* blue */
+    --secondary: #1cb0f6;
     --secondary-dark: #1899d6;
 
     --orange: #ff9600;
@@ -49,7 +48,7 @@
     font-weight: 700;
   }
 
-  /* ==================== CHUNKY BUTTON SYSTEM ==================== */
+  /* ==================== BUTTON SYSTEM ==================== */
   .btn {
     position: relative;
     border: none;
@@ -87,21 +86,12 @@
     border-bottom: 2px solid var(--border);
     position: sticky; top: 0; z-index: 100;
   }
-
-  .header-inner {
-    padding: 16px 20px 0;
-    max-width: 600px; margin: 0 auto;
-  }
-
+  .header-inner { padding: 16px 20px 0; max-width: 600px; margin: 0 auto; }
   .header-top {
     display: flex; align-items: center; justify-content: space-between;
     gap: 12px; margin-bottom: 14px;
   }
-
-  .logo {
-    display: flex; align-items: center; gap: 10px;
-  }
-
+  .logo { display: flex; align-items: center; gap: 10px; }
   .logo-icon {
     width: 44px; height: 44px;
     background: var(--primary);
@@ -110,7 +100,6 @@
     font-size: 24px;
     box-shadow: 0 3px 0 var(--primary-dark);
   }
-
   h1 {
     font-family: 'Fredoka', sans-serif;
     font-size: 22px;
@@ -119,18 +108,9 @@
     line-height: 1;
     letter-spacing: -0.5px;
   }
-  .sub-title {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--text-dim);
-    letter-spacing: 1px;
-    margin-top: 2px;
-  }
+  .sub-title { font-size: 10px; font-weight: 700; color: var(--text-dim); letter-spacing: 1px; margin-top: 2px; }
 
-  /* Stats pills in header (streak, etc.) */
-  .header-stats {
-    display: flex; gap: 8px; align-items: center;
-  }
+  .header-stats { display: flex; gap: 8px; align-items: center; }
   .stat-pill {
     display: flex; align-items: center; gap: 4px;
     background: var(--surface);
@@ -142,74 +122,47 @@
   }
   .stat-pill .icon { font-size: 16px; }
 
-  /* Auth */
-  .auth-bar {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 11px;
-    font-weight: 700;
-  }
+  .auth-bar { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; }
   .auth-status { color: var(--text-dim); }
   .auth-status.synced { color: var(--primary); }
   .auth-status.syncing { color: var(--orange); }
   .auth-status.error { color: var(--red); }
 
-  .btn-sm {
-    padding: 6px 12px;
-    font-size: 11px;
-    border-radius: 10px;
-  }
+  .btn-sm { padding: 6px 12px; font-size: 11px; border-radius: 10px; }
 
-  /* Tabs */
-  .tabs {
-    display: flex;
-    gap: 0;
-    margin-top: 4px;
-  }
+  .tabs { display: flex; gap: 0; margin-top: 4px; }
   .tab-btn {
-    flex: 1;
-    padding: 14px 0;
-    background: none;
-    border: none;
+    flex: 1; padding: 14px 0;
+    background: none; border: none;
     color: var(--text-dim);
     font-family: inherit;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-size: 13px; font-weight: 800;
+    letter-spacing: 1px; text-transform: uppercase;
     cursor: pointer;
     border-bottom: 3px solid transparent;
     transition: color 0.15s;
   }
-  .tab-btn.active {
-    color: var(--primary);
-    border-bottom-color: var(--primary);
-  }
+  .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
 
-  /* ==================== MAIN ==================== */
   main { padding: 20px; max-width: 600px; margin: 0 auto; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; animation: fadeIn 0.25s; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
   .section-label {
-    font-size: 11px;
-    font-weight: 800;
+    font-size: 11px; font-weight: 800;
     letter-spacing: 1.5px;
     color: var(--text-dim);
     text-transform: uppercase;
-    margin-bottom: 12px;
-    margin-top: 18px;
+    margin-bottom: 12px; margin-top: 18px;
   }
   .section-label:first-child { margin-top: 6px; }
 
   /* ==================== WORKOUT PICKER ==================== */
   .workout-selector {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 10px;
-    margin-bottom: 16px;
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 10px; margin-bottom: 16px;
   }
-
   .workout-btn {
     background: var(--surface);
     border: 2px solid var(--border);
@@ -224,19 +177,15 @@
   }
   .workout-btn .letter {
     font-family: 'Fredoka', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--text-muted);
-    line-height: 1;
+    font-size: 28px; font-weight: 700;
+    color: var(--text-muted); line-height: 1;
   }
   .workout-btn .label {
     display: block;
-    font-size: 10px;
-    letter-spacing: 0.5px;
+    font-size: 10px; letter-spacing: 0.5px;
     text-transform: uppercase;
     color: var(--text-dim);
-    margin-top: 4px;
-    font-weight: 800;
+    margin-top: 4px; font-weight: 800;
   }
   .workout-btn.active {
     background: var(--surface2);
@@ -271,17 +220,13 @@
   }
   .repeat-text { flex: 1; }
   .repeat-title {
-    font-size: 13px;
-    font-weight: 800;
+    font-size: 13px; font-weight: 800;
     color: var(--text);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    text-transform: uppercase; letter-spacing: 0.5px;
   }
   .repeat-sub {
-    font-size: 11px;
-    color: var(--text-dim);
-    font-weight: 700;
-    margin-top: 2px;
+    font-size: 11px; color: var(--text-dim);
+    font-weight: 700; margin-top: 2px;
   }
   .repeat-bar.hidden { display: none; }
 
@@ -299,26 +244,20 @@
   }
   .timer-display {
     font-family: 'Fredoka', sans-serif;
-    font-size: 48px;
-    line-height: 1;
+    font-size: 48px; line-height: 1;
     color: var(--primary);
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-weight: 700; letter-spacing: 1px;
     transition: color 0.3s;
   }
   .timer-display.urgent { color: var(--red); }
   .timer-label {
-    font-size: 9px;
-    letter-spacing: 1.5px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    font-weight: 800;
-    margin-top: 4px;
+    font-size: 9px; letter-spacing: 1.5px;
+    color: var(--text-dim); text-transform: uppercase;
+    font-weight: 800; margin-top: 4px;
   }
   .timer-controls { display: flex; gap: 8px; }
   .timer-controls .btn { padding: 12px 16px; font-size: 12px; border-radius: 12px; }
 
-  /* Rest duration chips */
   .duration-chips {
     display: flex; gap: 6px;
     margin-top: 12px;
@@ -333,8 +272,7 @@
     border-radius: 10px;
     color: var(--text-muted);
     font-family: inherit;
-    font-size: 12px;
-    font-weight: 800;
+    font-size: 12px; font-weight: 800;
     cursor: pointer;
     transition: all 0.15s;
   }
@@ -371,7 +309,6 @@
     transition: border-color 0.15s;
   }
   .exercise-card.active-row { border-color: var(--primary); }
-
   .exercise-header {
     display: flex; align-items: center; gap: 10px;
     margin-bottom: 6px;
@@ -389,18 +326,21 @@
     font-weight: 700;
   }
   .exercise-name {
-    font-size: 14px;
-    font-weight: 800;
+    font-size: 14px; font-weight: 800;
     color: var(--text);
-    flex: 1;
-    line-height: 1.3;
+    flex: 1; line-height: 1.3;
+    cursor: pointer;
   }
+  .exercise-name .chart-icon {
+    font-size: 14px; margin-left: 4px;
+    opacity: 0.5;
+    transition: opacity 0.15s;
+  }
+  .exercise-name:hover .chart-icon { opacity: 1; }
 
   .overload-hint {
-    font-size: 12px;
-    color: var(--primary);
-    margin-bottom: 12px;
-    margin-top: 4px;
+    font-size: 12px; color: var(--primary);
+    margin-bottom: 12px; margin-top: 4px;
     font-weight: 700;
     display: flex; align-items: center; gap: 6px;
     background: rgba(88,204,2,0.1);
@@ -410,44 +350,66 @@
   .overload-hint .arrow { font-size: 16px; }
 
   .inputs-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1.2fr;
+    display: grid; grid-template-columns: 1fr 1fr 1.2fr;
     gap: 8px;
   }
   .input-group label {
-    font-size: 10px;
-    letter-spacing: 1px;
+    font-size: 10px; letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--text-dim);
-    display: block;
-    margin-bottom: 6px;
+    display: block; margin-bottom: 6px;
     font-weight: 800;
   }
   .input-group input {
-    width: 100%;
-    padding: 12px 10px;
+    width: 100%; padding: 12px 10px;
     background: var(--bg2);
     border: 2px solid var(--border);
     border-radius: 12px;
     color: var(--text);
     font-family: 'Fredoka', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 18px; font-weight: 600;
     text-align: center;
     transition: all 0.15s;
     -webkit-appearance: none;
   }
-  .input-group input::placeholder {
-    color: var(--text-dim);
-    opacity: 0.5;
-    font-weight: 500;
-  }
+  .input-group input::placeholder { color: var(--text-dim); opacity: 0.5; font-weight: 500; }
   .input-group input:focus {
     outline: none;
     border-color: var(--primary);
     background: var(--surface2);
   }
   .input-group input.has-value { border-color: var(--primary); }
+
+  /* ==================== NOTES ==================== */
+  .notes-card {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 14px;
+    margin-top: 12px;
+  }
+  .notes-label {
+    font-size: 10px; letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px; font-weight: 800;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .notes-input {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--bg2);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px; font-weight: 600;
+    resize: vertical;
+    min-height: 44px;
+    -webkit-appearance: none;
+  }
+  .notes-input::placeholder { color: var(--text-dim); opacity: 0.6; font-weight: 500; }
+  .notes-input:focus { outline: none; border-color: var(--primary); }
 
   /* ==================== LOG BUTTON ==================== */
   .btn-log {
@@ -466,8 +428,7 @@
   }
   .history-title {
     font-family: 'Fredoka', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 24px; font-weight: 700;
     color: var(--text);
   }
   .btn-clear {
@@ -476,8 +437,7 @@
     border: 2px solid var(--border);
     border-radius: 100px;
     color: var(--text-dim);
-    font-size: 11px;
-    font-weight: 800;
+    font-size: 11px; font-weight: 800;
     cursor: pointer;
     font-family: inherit;
     text-transform: uppercase;
@@ -491,14 +451,10 @@
     padding: 50px 20px;
     color: var(--text-dim);
   }
-  .history-empty .empty-icon {
-    font-size: 56px; margin-bottom: 16px; display: block;
-  }
+  .history-empty .empty-icon { font-size: 56px; margin-bottom: 16px; display: block; }
   .history-empty .empty-text {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text-muted);
-    line-height: 1.5;
+    font-size: 14px; font-weight: 700;
+    color: var(--text-muted); line-height: 1.5;
   }
 
   .history-entry {
@@ -507,22 +463,20 @@
     border-radius: 16px;
     padding: 14px 16px;
     margin-bottom: 10px;
-    cursor: pointer;
     transition: all 0.15s;
   }
   .history-entry:hover { border-color: var(--border-light); }
   .history-entry-header {
     display: flex; justify-content: space-between; align-items: flex-start;
     gap: 10px;
+    cursor: pointer;
   }
   .he-left { flex: 1; }
   .he-workout {
     font-family: 'Fredoka', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 18px; font-weight: 700;
     color: var(--primary);
-    line-height: 1;
-    margin-bottom: 4px;
+    line-height: 1; margin-bottom: 4px;
   }
   .he-meta {
     display: flex; gap: 10px; align-items: center;
@@ -540,6 +494,16 @@
     font-weight: 700;
     flex-shrink: 0;
   }
+  .he-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 6px;
+    font-style: italic;
+    line-height: 1.4;
+  }
+  .he-note::before { content: '"'; }
+  .he-note::after { content: '"'; }
   .he-exercises {
     margin-top: 12px;
     display: none;
@@ -559,13 +523,18 @@
     font-family: 'Fredoka', sans-serif;
     font-weight: 600;
   }
+  .he-actions {
+    display: flex; gap: 8px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+  .he-actions .btn { padding: 8px 12px; font-size: 11px; border-radius: 10px; flex: 1; }
 
   /* ==================== STATS ==================== */
   .stats-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 20px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px; margin-bottom: 20px;
   }
   .stat-card {
     background: var(--surface);
@@ -575,10 +544,7 @@
     text-align: center;
     position: relative;
   }
-  .stat-icon {
-    font-size: 20px;
-    margin-bottom: 4px;
-  }
+  .stat-icon { font-size: 20px; margin-bottom: 4px; }
   .stat-value {
     font-family: 'Fredoka', sans-serif;
     font-size: 28px;
@@ -587,8 +553,7 @@
     font-weight: 700;
   }
   .stat-label {
-    font-size: 10px;
-    letter-spacing: 0.5px;
+    font-size: 10px; letter-spacing: 0.5px;
     color: var(--text-dim);
     text-transform: uppercase;
     margin-top: 4px;
@@ -645,19 +610,189 @@
   .toast.red { background: var(--red); box-shadow: 0 4px 0 var(--red-dark); }
   .toast.blue { background: var(--secondary); box-shadow: 0 4px 0 var(--secondary-dark); }
 
-  /* ==================== SUCCESS CONFETTI (subtle) ==================== */
   @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.04); }
-    100% { transform: scale(1); }
+    0% { transform: scale(1); } 50% { transform: scale(1.04); } 100% { transform: scale(1); }
   }
   .btn.celebrate { animation: pulse 0.4s ease; }
 
-  /* ==================== RIGHT-SIDE COL ==================== */
-  .right-col {
-    display: flex; flex-direction: column; align-items: flex-end;
-    gap: 6px;
+  .right-col { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+
+  /* ==================== MODAL ==================== */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.2s;
   }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: var(--bg2);
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 20px;
+  }
+  .modal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .modal-title {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 20px;
+    color: var(--text);
+    font-weight: 700;
+  }
+  .modal-close {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    color: var(--text-muted);
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ==================== CHART ==================== */
+  .chart-card {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .chart-title {
+    font-size: 12px; font-weight: 800;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .chart-empty {
+    padding: 30px 10px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .chart-stats {
+    display: flex; gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .chart-stat {
+    flex: 1;
+    text-align: center;
+  }
+  .chart-stat-val {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 22px;
+    color: var(--primary);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .chart-stat-val.neutral { color: var(--text); }
+  .chart-stat-val.bad { color: var(--red); }
+  .chart-stat-label {
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+    font-weight: 800;
+  }
+  svg.chart {
+    width: 100%;
+    height: 160px;
+    overflow: visible;
+  }
+  .chart-line {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .chart-area {
+    fill: rgba(88,204,2,0.15);
+  }
+  .chart-dot {
+    fill: var(--primary);
+    stroke: var(--bg2);
+    stroke-width: 2;
+  }
+  .chart-grid {
+    stroke: var(--border);
+    stroke-width: 1;
+    stroke-dasharray: 2 4;
+  }
+  .chart-axis-label {
+    fill: var(--text-dim);
+    font-size: 10px;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  /* ==================== EDIT MODAL ==================== */
+  .edit-row {
+    display: grid;
+    grid-template-columns: 1fr 0.6fr 0.6fr 0.8fr;
+    gap: 6px;
+    margin-bottom: 8px;
+    align-items: center;
+  }
+  .edit-row .ex-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    line-height: 1.2;
+  }
+  .edit-row input {
+    padding: 8px;
+    background: var(--bg2);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    -webkit-appearance: none;
+  }
+  .edit-row input:focus { outline: none; border-color: var(--primary); }
+  .edit-headers {
+    display: grid;
+    grid-template-columns: 1fr 0.6fr 0.6fr 0.8fr;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+  .edit-headers span {
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 800;
+  }
+  .edit-headers span:first-child { text-align: left; }
+
+  .modal-actions {
+    display: flex; gap: 8px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .modal-actions .btn { flex: 1; padding: 12px; font-size: 13px; }
 
   /* ==================== MOBILE ==================== */
   @media (max-width: 400px) {
@@ -666,6 +801,8 @@
     .header-stats .stat-pill { padding: 5px 8px; font-size: 12px; }
     h1 { font-size: 19px; }
     .logo-icon { width: 38px; height: 38px; font-size: 20px; }
+    .edit-row { grid-template-columns: 1fr 0.5fr 0.5fr 0.7fr; gap: 4px; }
+    .edit-row input { font-size: 13px; padding: 6px 4px; }
   }
 </style>
 </head>
@@ -756,6 +893,11 @@
     <div class="section-label">Exercises</div>
     <div id="exercises-container"></div>
 
+    <div class="notes-card">
+      <div class="notes-label">📝 Session Notes (optional)</div>
+      <textarea class="notes-input" id="session-notes" placeholder="How did it feel? Anything to remember?"></textarea>
+    </div>
+
     <button class="btn green btn-log" id="log-btn" onclick="logWorkout()">LOG WORKOUT</button>
   </div>
 
@@ -784,6 +926,32 @@
     <div id="history-container"></div>
   </div>
 </main>
+
+<!-- ========== CHART MODAL ========== -->
+<div class="modal-overlay" id="chart-modal" onclick="if(event.target===this) closeChartModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="chart-modal-title">Progress</div>
+      <button class="modal-close" onclick="closeChartModal()">×</button>
+    </div>
+    <div id="chart-content"></div>
+  </div>
+</div>
+
+<!-- ========== EDIT MODAL ========== -->
+<div class="modal-overlay" id="edit-modal" onclick="if(event.target===this) closeEditModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="edit-modal-title">Edit Session</div>
+      <button class="modal-close" onclick="closeEditModal()">×</button>
+    </div>
+    <div id="edit-content"></div>
+    <div class="modal-actions">
+      <button class="btn red" onclick="deleteSession()">DELETE</button>
+      <button class="btn green" onclick="saveEdit()">SAVE</button>
+    </div>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -854,18 +1022,15 @@
   let history = [];
   let workoutStartTime = null;
   let wakeLock = null;
+  let editingSessionId = null;
 
-  // ========== WAKE LOCK (#11) ==========
+  // ========== WAKE LOCK ==========
   async function requestWakeLock() {
     if ('wakeLock' in navigator) {
-      try {
-        wakeLock = await navigator.wakeLock.request('screen');
-      } catch (e) { console.log('Wake lock failed:', e); }
+      try { wakeLock = await navigator.wakeLock.request('screen'); } catch (e) {}
     }
   }
-  function releaseWakeLock() {
-    if (wakeLock) { wakeLock.release(); wakeLock = null; }
-  }
+  function releaseWakeLock() { if (wakeLock) { wakeLock.release(); wakeLock = null; } }
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible' && timerRunning) requestWakeLock();
   });
@@ -895,10 +1060,7 @@
     if (currentUser) { await window.fb.signOut(window.fb.auth); }
     else {
       try { await window.fb.signInWithPopup(window.fb.auth, window.fb.provider); }
-      catch (e) {
-        console.error(e);
-        showToast('Sign-in failed: ' + (e.code || e.message), 'red');
-      }
+      catch (e) { showToast('Sign-in failed: ' + (e.code || e.message), 'red'); }
     }
   }
   window.handleAuth = handleAuth;
@@ -918,7 +1080,6 @@
       setSyncStatus('synced', `${currentUser.displayName?.split(' ')[0] || 'Signed in'} ✓`);
       refresh();
     } catch (e) {
-      console.error(e);
       setSyncStatus('error', 'Sync error');
     }
   }
@@ -931,7 +1092,6 @@
       await window.fb.setDoc(ref, { history, updatedAt: Date.now() });
       setSyncStatus('synced', `${currentUser.displayName?.split(' ')[0] || 'Signed in'} ✓`);
     } catch (e) {
-      console.error(e);
       setSyncStatus('error', 'Save failed');
     }
   }
@@ -942,7 +1102,7 @@
     status.className = 'auth-status ' + cls;
   }
 
-  // ========== TIMER (#9 custom + #10 sound + #11 wake lock) ==========
+  // ========== TIMER ==========
   function setRestDuration(sec, btn) {
     timerDefault = sec;
     timerSeconds = sec;
@@ -1043,7 +1203,7 @@
     for (let i = history.length - 1; i >= 0; i--) {
       if (history[i].workout === workoutKey) {
         const ex = history[i].exercises.find(e => e.name === exerciseName);
-        if (ex) return ex;
+        if (ex && (ex.sets || ex.reps || ex.weight)) return ex;
       }
     }
     return null;
@@ -1056,7 +1216,7 @@
     return null;
   }
 
-  // ========== REPEAT LAST (#2) ==========
+  // ========== REPEAT LAST ==========
   function repeatLast() {
     const last = getLastWorkoutSession(currentWorkout);
     if (!last) { showToast('No previous session for this workout'); return; }
@@ -1069,7 +1229,6 @@
         document.getElementById(`weight_${i}`).value = ex.weight || '';
       }
     });
-    // mark inputs
     document.querySelectorAll('.input-group input').forEach(inp => {
       if (inp.value) inp.classList.add('has-value');
     });
@@ -1093,7 +1252,7 @@
     }
   }
 
-  // ========== EXERCISE RENDER (#12 placeholder pre-fill) ==========
+  // ========== EXERCISE RENDER ==========
   function renderExercises() {
     const container = document.getElementById('exercises-container');
     const exercises = WORKOUTS[currentWorkout].exercises;
@@ -1111,11 +1270,12 @@
         repsPh = last.reps || '10';
         weightPh = last.weight || '0';
       }
+      const safeName = name.replace(/'/g, "\\'");
       return `
         <div class="exercise-card">
           <div class="exercise-header">
             <div class="exercise-num">${i+1}</div>
-            <div class="exercise-name">${name}</div>
+            <div class="exercise-name" onclick="openChartModal('${safeName}')">${name} <span class="chart-icon">📈</span></div>
           </div>
           ${hint}
           <div class="inputs-row">
@@ -1128,41 +1288,36 @@
     updateRepeatBar();
   }
 
-  function markFilled(input) {
-    input.classList.toggle('has-value', !!input.value);
-  }
+  function markFilled(input) { input.classList.toggle('has-value', !!input.value); }
   window.markFilled = markFilled;
-
-  // ========== DURATION TRACKING (#4) ==========
-  function markStart() {
-    if (!workoutStartTime) workoutStartTime = Date.now();
-  }
+  function markStart() { if (!workoutStartTime) workoutStartTime = Date.now(); }
   window.markStart = markStart;
 
-  // ========== LOG WORKOUT ==========
+  // ========== LOG WORKOUT (with #7 empty-skip + #8 notes) ==========
   async function logWorkout() {
     const exercises = WORKOUTS[currentWorkout].exercises;
     const unit = useKg ? 'KG' : 'LBS';
     const logged = [];
     let totalVolume = 0;
-    let anyData = false;
 
     for (let i = 0; i < exercises.length; i++) {
       const sets = parseFloat(document.getElementById(`sets_${i}`).value) || 0;
       const reps = parseFloat(document.getElementById(`reps_${i}`).value) || 0;
       const weight = parseFloat(document.getElementById(`weight_${i}`).value) || 0;
+      // #7: skip exercises with no data — don't pollute history with empty rows
+      if (sets === 0 && reps === 0 && weight === 0) continue;
       const vol = sets * reps * weight;
       totalVolume += vol;
-      if (sets || reps || weight) anyData = true;
       logged.push({ name: exercises[i], sets, reps, weight, unit, volume: vol });
     }
 
-    if (!anyData) {
+    if (logged.length === 0) {
       showToast('Add some numbers first 💪', 'red');
       return;
     }
 
     const duration = workoutStartTime ? Math.round((Date.now() - workoutStartTime) / 60000) : null;
+    const notes = document.getElementById('session-notes').value.trim();
 
     const entry = {
       id: Date.now(),
@@ -1172,7 +1327,8 @@
       exercises: logged,
       totalVolume: Math.round(totalVolume),
       unit,
-      duration
+      duration,
+      notes: notes || null
     };
 
     history.push(entry);
@@ -1185,8 +1341,8 @@
     setTimeout(() => {
       btn.classList.remove('celebrate');
       btn.textContent = 'LOG WORKOUT';
-      // clear inputs for next time
       document.querySelectorAll('.input-group input').forEach(inp => { inp.value = ''; inp.classList.remove('has-value'); });
+      document.getElementById('session-notes').value = '';
       workoutStartTime = null;
       renderExercises();
       updateHeaderStreak();
@@ -1243,23 +1399,262 @@
       const exRows = e.exercises.map(ex =>
         `<div class="he-ex-row"><span>${ex.name}</span><span>${ex.sets || '—'}×${ex.reps || '—'} @ ${ex.weight || 0}${ex.unit}</span></div>`
       ).join('');
+      const noteHtml = e.notes ? `<div class="he-note">${escapeHtml(e.notes)}</div>` : '';
       return `
-        <div class="history-entry" onclick="this.classList.toggle('expanded')">
-          <div class="history-entry-header">
+        <div class="history-entry" data-id="${e.id}">
+          <div class="history-entry-header" onclick="toggleEntry(this)">
             <div class="he-left">
               <div class="he-workout">WORKOUT ${e.workout} — ${e.workoutName || ''}</div>
               <div class="he-meta">
                 <span class="vol">🏋️ ${(e.totalVolume||0).toLocaleString()} ${e.unit}</span>
                 ${durStr ? `<span class="dot">•</span><span>⏱️ ${durStr}</span>` : ''}
               </div>
+              ${noteHtml}
             </div>
             <div class="he-date">${dateStr}<br>${timeStr}</div>
           </div>
-          <div class="he-exercises">${exRows}</div>
+          <div class="he-exercises">
+            ${exRows}
+            <div class="he-actions">
+              <button class="btn blue" onclick="openEditModal(${e.id})">✏️ EDIT</button>
+            </div>
+          </div>
         </div>`;
     }).join('');
   }
 
+  function toggleEntry(headerEl) {
+    headerEl.parentElement.classList.toggle('expanded');
+  }
+  window.toggleEntry = toggleEntry;
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  // ========== EDIT MODAL (#6) ==========
+  function openEditModal(id) {
+    const session = history.find(h => h.id === id);
+    if (!session) return;
+    editingSessionId = id;
+
+    const d = new Date(session.date);
+    document.getElementById('edit-modal-title').textContent =
+      `Edit ${d.toLocaleDateString('en-GB', { day:'numeric', month:'short' })} — Workout ${session.workout}`;
+
+    const content = document.getElementById('edit-content');
+    const exercises = WORKOUTS[session.workout].exercises;
+    const rowsHtml = exercises.map((name, i) => {
+      const ex = session.exercises.find(e => e.name === name) || { sets: 0, reps: 0, weight: 0 };
+      return `
+        <div class="edit-row">
+          <div class="ex-name">${name}</div>
+          <input type="number" id="edit_sets_${i}" value="${ex.sets || ''}" placeholder="0" inputmode="numeric">
+          <input type="number" id="edit_reps_${i}" value="${ex.reps || ''}" placeholder="0" inputmode="numeric">
+          <input type="number" id="edit_weight_${i}" value="${ex.weight || ''}" placeholder="0" step="0.5" inputmode="decimal">
+        </div>`;
+    }).join('');
+
+    content.innerHTML = `
+      <div class="edit-headers">
+        <span>Exercise</span><span>Sets</span><span>Reps</span><span>Wt(${session.unit})</span>
+      </div>
+      ${rowsHtml}
+      <div style="margin-top:14px">
+        <div class="notes-label">📝 Notes</div>
+        <textarea class="notes-input" id="edit-notes" placeholder="Session notes...">${session.notes || ''}</textarea>
+      </div>
+    `;
+    document.getElementById('edit-modal').classList.add('show');
+  }
+  window.openEditModal = openEditModal;
+
+  function closeEditModal() {
+    document.getElementById('edit-modal').classList.remove('show');
+    editingSessionId = null;
+  }
+  window.closeEditModal = closeEditModal;
+
+  async function saveEdit() {
+    const session = history.find(h => h.id === editingSessionId);
+    if (!session) return;
+
+    const exercises = WORKOUTS[session.workout].exercises;
+    const updated = [];
+    let totalVolume = 0;
+
+    for (let i = 0; i < exercises.length; i++) {
+      const sets = parseFloat(document.getElementById(`edit_sets_${i}`).value) || 0;
+      const reps = parseFloat(document.getElementById(`edit_reps_${i}`).value) || 0;
+      const weight = parseFloat(document.getElementById(`edit_weight_${i}`).value) || 0;
+      if (sets === 0 && reps === 0 && weight === 0) continue;
+      const vol = sets * reps * weight;
+      totalVolume += vol;
+      updated.push({ name: exercises[i], sets, reps, weight, unit: session.unit, volume: vol });
+    }
+
+    if (updated.length === 0) {
+      showToast('Session needs at least one exercise', 'red');
+      return;
+    }
+
+    session.exercises = updated;
+    session.totalVolume = Math.round(totalVolume);
+    const notes = document.getElementById('edit-notes').value.trim();
+    session.notes = notes || null;
+    session.editedAt = Date.now();
+
+    localStorage.setItem('wwwHistory', JSON.stringify(history));
+    await saveToCloud();
+    closeEditModal();
+    renderHistory();
+    renderExercises();
+    showToast('✓ Session updated');
+  }
+  window.saveEdit = saveEdit;
+
+  async function deleteSession() {
+    if (!confirm('Delete this session permanently?')) return;
+    history = history.filter(h => h.id !== editingSessionId);
+    localStorage.setItem('wwwHistory', JSON.stringify(history));
+    await saveToCloud();
+    closeEditModal();
+    refresh();
+    renderHistory();
+    showToast('Session deleted', 'red');
+  }
+  window.deleteSession = deleteSession;
+
+  // ========== CHART MODAL (#3) ==========
+  function openChartModal(exerciseName) {
+    document.getElementById('chart-modal-title').textContent = exerciseName.split(' (')[0];
+
+    // Collect all instances of this exercise across history (chronological)
+    const points = [];
+    history.forEach(session => {
+      const ex = session.exercises.find(e => e.name === exerciseName);
+      if (ex && (ex.sets || ex.reps || ex.weight)) {
+        points.push({
+          date: new Date(session.date),
+          weight: parseFloat(ex.weight) || 0,
+          reps: parseInt(ex.reps) || 0,
+          sets: parseInt(ex.sets) || 0,
+          unit: ex.unit,
+          volume: ex.volume || 0
+        });
+      }
+    });
+
+    const content = document.getElementById('chart-content');
+    if (points.length === 0) {
+      content.innerHTML = `<div class="chart-empty">📊 No data yet for this exercise.<br>Log a session to see your progress!</div>`;
+      document.getElementById('chart-modal').classList.add('show');
+      return;
+    }
+
+    // Stats
+    const first = points[0], last = points[points.length - 1];
+    const weightDelta = last.weight - first.weight;
+    const volumeDelta = last.volume - first.volume;
+    const maxWeight = Math.max(...points.map(p => p.weight));
+    const unit = last.unit;
+
+    const weightChange = points.length > 1 ? (weightDelta > 0 ? `+${weightDelta}` : `${weightDelta}`) : '—';
+    const weightClass = weightDelta > 0 ? 'chart-stat-val' : weightDelta < 0 ? 'chart-stat-val bad' : 'chart-stat-val neutral';
+
+    // Build SVG line chart (weight over time)
+    const svg = buildLineChart(points, unit);
+
+    content.innerHTML = `
+      <div class="chart-stats">
+        <div class="chart-stat">
+          <div class="chart-stat-val neutral">${last.weight}${unit}</div>
+          <div class="chart-stat-label">Current</div>
+        </div>
+        <div class="chart-stat">
+          <div class="${weightClass}">${weightChange}${weightChange === '—' ? '' : unit}</div>
+          <div class="chart-stat-label">Change</div>
+        </div>
+        <div class="chart-stat">
+          <div class="chart-stat-val neutral">${maxWeight}${unit}</div>
+          <div class="chart-stat-label">Peak</div>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Weight Over Time</div>
+        ${svg}
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Sessions Logged</div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);font-weight:700">
+          <span>First: ${first.date.toLocaleDateString('en-GB', {day:'numeric', month:'short'})}</span>
+          <span>${points.length} session${points.length === 1 ? '' : 's'}</span>
+          <span>Last: ${last.date.toLocaleDateString('en-GB', {day:'numeric', month:'short'})}</span>
+        </div>
+      </div>
+    `;
+    document.getElementById('chart-modal').classList.add('show');
+  }
+  window.openChartModal = openChartModal;
+
+  function closeChartModal() {
+    document.getElementById('chart-modal').classList.remove('show');
+  }
+  window.closeChartModal = closeChartModal;
+
+  function buildLineChart(points, unit) {
+    const W = 460, H = 160, PADL = 36, PADR = 16, PADT = 14, PADB = 28;
+    const w = W - PADL - PADR, h = H - PADT - PADB;
+
+    if (points.length === 1) {
+      const cx = PADL + w/2, cy = PADT + h/2;
+      return `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">
+        <circle cx="${cx}" cy="${cy}" r="6" class="chart-dot"/>
+        <text x="${cx}" y="${cy - 14}" text-anchor="middle" class="chart-axis-label">${points[0].weight}${unit}</text>
+        <text x="${cx}" y="${H - 8}" text-anchor="middle" class="chart-axis-label">Need more sessions for a trend</text>
+      </svg>`;
+    }
+
+    const weights = points.map(p => p.weight);
+    let minW = Math.min(...weights), maxW = Math.max(...weights);
+    if (minW === maxW) { minW -= 1; maxW += 1; }
+    const padPct = 0.1;
+    const range = maxW - minW;
+    minW -= range * padPct;
+    maxW += range * padPct;
+
+    const xFor = i => PADL + (i / (points.length - 1)) * w;
+    const yFor = v => PADT + h - ((v - minW) / (maxW - minW)) * h;
+
+    const lineD = points.map((p, i) => `${i === 0 ? 'M' : 'L'}${xFor(i).toFixed(1)},${yFor(p.weight).toFixed(1)}`).join(' ');
+    const areaD = lineD + ` L${xFor(points.length - 1).toFixed(1)},${PADT + h} L${xFor(0).toFixed(1)},${PADT + h} Z`;
+
+    // gridlines (3 horizontal)
+    const grids = [0, 0.5, 1].map(t => {
+      const y = PADT + t * h;
+      const v = (maxW - t * (maxW - minW)).toFixed(0);
+      return `<line x1="${PADL}" y1="${y}" x2="${PADL + w}" y2="${y}" class="chart-grid"/>
+              <text x="${PADL - 6}" y="${y + 4}" text-anchor="end" class="chart-axis-label">${v}</text>`;
+    }).join('');
+
+    const dots = points.map((p, i) =>
+      `<circle cx="${xFor(i).toFixed(1)}" cy="${yFor(p.weight).toFixed(1)}" r="4" class="chart-dot"/>`
+    ).join('');
+
+    const firstD = points[0].date.toLocaleDateString('en-GB', {day:'numeric', month:'short'});
+    const lastD = points[points.length-1].date.toLocaleDateString('en-GB', {day:'numeric', month:'short'});
+
+    return `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">
+      ${grids}
+      <path d="${areaD}" class="chart-area"/>
+      <path d="${lineD}" class="chart-line"/>
+      ${dots}
+      <text x="${PADL}" y="${H - 8}" text-anchor="start" class="chart-axis-label">${firstD}</text>
+      <text x="${PADL + w}" y="${H - 8}" text-anchor="end" class="chart-axis-label">${lastD}</text>
+    </svg>`;
+  }
+
+  // ========== CLEAR ==========
   async function clearHistory() {
     if (confirm('Clear all session history? This will also wipe cloud data.')) {
       history = [];
