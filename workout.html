@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WORK WEEK WARRIOR</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface2: #181818;
+    --border: #252525;
+    --accent: #e8ff47;
+    --accent2: #ff4747;
+    --text: #f0f0f0;
+    --muted: #555;
+    --muted2: #888;
+    --green: #47ff8a;
+    --orange: #ff8f47;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* GRAIN OVERLAY */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+  }
+
+  header {
+    padding: 24px 20px 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    position: sticky; top: 0; z-index: 100;
+  }
+
+  .header-top {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 7vw, 48px);
+    letter-spacing: 3px;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .week-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted2);
+    background: var(--border);
+    padding: 4px 8px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex; gap: 0;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 10px 0;
+    background: none; border: none;
+    color: var(--muted2);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* MAIN */
+  main { padding: 20px; max-width: 600px; margin: 0 auto; }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* WORKOUT SELECTOR */
+  .workout-selector {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .workout-btn {
+    padding: 12px 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--muted2);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+  }
+
+  .workout-btn small {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  .workout-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+  }
+
+  .workout-btn.active small { color: #333; }
+
+  /* EXERCISE CARD */
+  .exercise-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .exercise-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+  }
+
+  .exercise-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px; letter-spacing: 0.5px;
+    color: var(--text);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  .overload-hint {
+    font-size: 11px;
+    color: var(--green);
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 5px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .overload-hint::before { content: '↑'; font-size: 13px; }
+
+  .inputs-row {
+    display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 8px;
+  }
+
+  .input-group label {
+    font-size: 9px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--muted2);
+    display: block; margin-bottom: 4px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 8px 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 16px;
+    text-align: center;
+    transition: border-color 0.15s;
+    -webkit-appearance: none;
+  }
+
+  .input-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  /* TIMER */
+  .timer-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .timer-display {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: 4px;
+    transition: color 0.3s;
+  }
+
+  .timer-display.urgent { color: var(--accent2); }
+
+  .timer-label {
+    font-size: 10px; letter-spacing: 2px;
+    color: var(--muted2); text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    margin-top: 4px;
+  }
+
+  .timer-controls { display: flex; gap: 8px; }
+
+  .btn-timer {
+    padding: 10px 18px;
+    border: none; border-radius: 8px;
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 1px;
+    font-weight: 500;
+    transition: all 0.15s;
+  }
+
+  .btn-timer-start {
+    background: var(--accent);
+    color: #000;
+  }
+
+  .btn-timer-start:active { transform: scale(0.96); }
+
+  .btn-timer-reset {
+    background: var(--border);
+    color: var(--muted2);
+  }
+
+  /* PROGRESS BAR */
+  .timer-progress {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .timer-progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 1s linear, background 0.3s;
+    width: 100%;
+  }
+
+  /* LOG BUTTON */
+  .btn-log {
+    width: 100%;
+    padding: 16px;
+    background: var(--accent);
+    border: none; border-radius: 10px;
+    color: #000;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; letter-spacing: 3px;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: all 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-log:active { transform: scale(0.98); }
+  .btn-log:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .btn-log.success {
+    background: var(--green);
+  }
+
+  /* HISTORY */
+  .history-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .history-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; letter-spacing: 2px; color: var(--accent);
+  }
+
+  .btn-clear {
+    padding: 6px 12px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--muted2);
+    font-size: 11px; cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.5px;
+    transition: all 0.15s;
+  }
+
+  .btn-clear:hover { border-color: var(--accent2); color: var(--accent2); }
+
+  .history-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px; letter-spacing: 1px;
+  }
+
+  .history-empty .empty-icon {
+    font-size: 40px; margin-bottom: 12px; display: block;
+  }
+
+  .history-entry {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .history-entry:hover { border-color: var(--muted); }
+
+  .history-entry-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 8px;
+  }
+
+  .he-workout {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px; letter-spacing: 2px;
+    color: var(--accent);
+  }
+
+  .he-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; color: var(--muted2);
+    letter-spacing: 0.5px;
+    text-align: right;
+  }
+
+  .he-volume {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px; color: var(--green);
+    letter-spacing: 0.5px;
+  }
+
+  .he-exercises {
+    margin-top: 8px;
+    display: none;
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+  }
+
+  .history-entry.expanded .he-exercises { display: block; }
+
+  .he-ex-row {
+    display: flex; justify-content: space-between;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted2);
+    padding: 3px 0;
+  }
+
+  .he-ex-row span:last-child { color: var(--text); }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px; margin-bottom: 20px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; letter-spacing: 2px;
+    color: var(--accent);
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 1px;
+    color: var(--muted2); text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--border);
+  }
+
+  /* UNIT TOGGLE */
+  .unit-toggle {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; color: var(--muted2);
+  }
+
+  .toggle-switch {
+    width: 40px; height: 22px;
+    background: var(--border);
+    border-radius: 11px;
+    position: relative; cursor: pointer;
+    transition: background 0.2s;
+    border: none;
+    flex-shrink: 0;
+  }
+
+  .toggle-switch.on { background: var(--accent); }
+
+  .toggle-knob {
+    position: absolute;
+    width: 16px; height: 16px;
+    background: #fff;
+    border-radius: 50%;
+    top: 3px; left: 3px;
+    transition: left 0.2s;
+  }
+
+  .toggle-switch.on .toggle-knob { left: 21px; }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--green);
+    color: #000;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px; letter-spacing: 1px;
+    padding: 12px 24px;
+    border-radius: 100px;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    z-index: 1000;
+    white-space: nowrap;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 400px) {
+    .inputs-row { grid-template-columns: 1fr 1fr 1fr; gap: 5px; }
+    .input-group input { font-size: 14px; padding: 7px 5px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div>
+      <h1>WORK WEEK WARRIOR</h1>
+      <div class="week-badge">5-DAY DUMBBELL PROGRAM</div>
+    </div>
+    <div class="unit-toggle">
+      <span id="unit-label">KG</span>
+      <button class="toggle-switch" id="unit-toggle" onclick="toggleUnit()">
+        <div class="toggle-knob"></div>
+      </button>
+      <span>LBS</span>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('tracker')">TRACKER</button>
+    <button class="tab-btn" onclick="switchTab('history')">HISTORY</button>
+  </div>
+</header>
+
+<main>
+  <!-- TRACKER TAB -->
+  <div id="tab-tracker" class="tab-panel active">
+
+    <div class="section-label" style="margin-top:16px">Select Workout</div>
+    <div class="workout-selector">
+      <button class="workout-btn active" onclick="selectWorkout('A',this)">
+        A<small>Push + Legs</small>
+      </button>
+      <button class="workout-btn" onclick="selectWorkout('B',this)">
+        B<small>Pull + Core</small>
+      </button>
+      <button class="workout-btn" onclick="selectWorkout('C',this)">
+        C<small>Full Body</small>
+      </button>
+    </div>
+
+    <div class="section-label">Rest Timer</div>
+    <div class="timer-card">
+      <div>
+        <div class="timer-display" id="timer-display">0:45</div>
+        <div class="timer-label">REST BETWEEN SETS</div>
+      </div>
+      <div class="timer-controls">
+        <button class="btn-timer btn-timer-start" id="timer-btn" onclick="toggleTimer()">START</button>
+        <button class="btn-timer btn-timer-reset" onclick="resetTimer()">RESET</button>
+      </div>
+    </div>
+    <div class="timer-progress"><div class="timer-progress-fill" id="timer-bar"></div></div>
+
+    <div class="section-label">Exercises</div>
+    <div id="exercises-container"></div>
+
+    <button class="btn-log" id="log-btn" onclick="logWorkout()">LOG WORKOUT</button>
+
+  </div>
+
+  <!-- HISTORY TAB -->
+  <div id="tab-history" class="tab-panel">
+    <div class="stats-row" id="stats-row">
+      <div class="stat-card">
+        <div class="stat-value" id="stat-sessions">0</div>
+        <div class="stat-label">Sessions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-volume">0</div>
+        <div class="stat-label">Total Vol</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-streak">0</div>
+        <div class="stat-label">Streak</div>
+      </div>
+    </div>
+    <div class="history-header">
+      <div class="history-title">SESSION LOG</div>
+      <button class="btn-clear" onclick="clearHistory()">CLEAR ALL</button>
+    </div>
+    <div id="history-container"></div>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const WORKOUTS = {
+    A: {
+      name: 'Push + Legs',
+      exercises: [
+        'Goblet Squat',
+        'Floor Press',
+        'Romanian Deadlift',
+        'Dumbbell Lunge',
+        'Lateral Raise',
+        'Tricep Kickback'
+      ]
+    },
+    B: {
+      name: 'Pull + Core',
+      exercises: [
+        'Dumbbell Row',
+        'Bicep Curl',
+        'Renegade Row',
+        'Hammer Curl',
+        'Dumbbell Deadlift',
+        'Russian Twist'
+      ]
+    },
+    C: {
+      name: 'Full Body',
+      exercises: [
+        'Dumbbell Thruster',
+        'Sumo Squat',
+        'Arnold Press',
+        'Bent-Over Row',
+        'Dumbbell Swing',
+        'Farmers Carry (30s)'
+      ]
+    }
+  };
+
+  let currentWorkout = 'A';
+  let timerInterval = null;
+  let timerSeconds = 45;
+  let timerRunning = false;
+  let useKg = true;
+
+  function toggleUnit() {
+    useKg = !useKg;
+    const toggle = document.getElementById('unit-toggle');
+    const label = document.getElementById('unit-label');
+    toggle.classList.toggle('on', !useKg);
+    label.textContent = useKg ? 'KG' : 'LBS';
+    renderExercises();
+  }
+
+  function selectWorkout(key, btn) {
+    currentWorkout = key;
+    document.querySelectorAll('.workout-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderExercises();
+  }
+
+  function getLastSession(workoutKey, exerciseName) {
+    const history = JSON.parse(localStorage.getItem('wwwHistory') || '[]');
+    for (let i = history.length - 1; i >= 0; i--) {
+      if (history[i].workout === workoutKey) {
+        const ex = history[i].exercises.find(e => e.name === exerciseName);
+        if (ex) return ex;
+      }
+    }
+    return null;
+  }
+
+  function renderExercises() {
+    const container = document.getElementById('exercises-container');
+    const exercises = WORKOUTS[currentWorkout].exercises;
+    const unit = useKg ? 'KG' : 'LBS';
+
+    container.innerHTML = exercises.map((name, i) => {
+      const last = getLastSession(currentWorkout, name);
+      let hint = '';
+      if (last) {
+        const nextReps = parseInt(last.reps) + 1;
+        hint = `<div class="overload-hint">Last: ${last.reps} reps @ ${last.weight}${last.unit} — try ${nextReps} reps today!</div>`;
+      }
+      return `
+        <div class="exercise-card">
+          <div class="exercise-name">${String(i+1).padStart(2,'0')}. ${name}</div>
+          ${hint}
+          <div class="inputs-row">
+            <div class="input-group">
+              <label>Sets</label>
+              <input type="number" id="sets_${i}" placeholder="3" min="1" max="10" inputmode="numeric">
+            </div>
+            <div class="input-group">
+              <label>Reps</label>
+              <input type="number" id="reps_${i}" placeholder="10" min="1" max="100" inputmode="numeric">
+            </div>
+            <div class="input-group">
+              <label>Weight (${unit})</label>
+              <input type="number" id="weight_${i}" placeholder="0" min="0" step="0.5" inputmode="decimal">
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function toggleTimer() {
+    if (timerRunning) {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      document.getElementById('timer-btn').textContent = 'START';
+    } else {
+      if (timerSeconds === 0) timerSeconds = 45;
+      timerRunning = true;
+      document.getElementById('timer-btn').textContent = 'PAUSE';
+      timerInterval = setInterval(tickTimer, 1000);
+    }
+  }
+
+  function tickTimer() {
+    timerSeconds--;
+    updateTimerDisplay();
+    if (timerSeconds <= 0) {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      document.getElementById('timer-btn').textContent = 'START';
+      showToast('🔔 Rest over — next set!');
+      if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+    }
+  }
+
+  function resetTimer() {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    timerSeconds = 45;
+    document.getElementById('timer-btn').textContent = 'START';
+    updateTimerDisplay();
+  }
+
+  function updateTimerDisplay() {
+    const m = Math.floor(timerSeconds / 60);
+    const s = timerSeconds % 60;
+    const display = document.getElementById('timer-display');
+    const bar = document.getElementById('timer-bar');
+    display.textContent = `${m}:${String(s).padStart(2,'0')}`;
+    display.classList.toggle('urgent', timerSeconds <= 10 && timerSeconds > 0);
+    const pct = (timerSeconds / 45) * 100;
+    bar.style.width = pct + '%';
+    bar.style.background = timerSeconds <= 10 ? 'var(--accent2)' : 'var(--accent)';
+  }
+
+  function logWorkout() {
+    const exercises = WORKOUTS[currentWorkout].exercises;
+    const unit = useKg ? 'KG' : 'LBS';
+    const logged = [];
+    let totalVolume = 0;
+
+    for (let i = 0; i < exercises.length; i++) {
+      const sets = parseFloat(document.getElementById(`sets_${i}`).value) || 0;
+      const reps = parseFloat(document.getElementById(`reps_${i}`).value) || 0;
+      const weight = parseFloat(document.getElementById(`weight_${i}`).value) || 0;
+      const vol = sets * reps * weight;
+      totalVolume += vol;
+      logged.push({ name: exercises[i], sets, reps, weight, unit, volume: vol });
+    }
+
+    const entry = {
+      id: Date.now(),
+      workout: currentWorkout,
+      workoutName: WORKOUTS[currentWorkout].name,
+      date: new Date().toISOString(),
+      exercises: logged,
+      totalVolume: Math.round(totalVolume),
+      unit
+    };
+
+    const history = JSON.parse(localStorage.getItem('wwwHistory') || '[]');
+    history.push(entry);
+    localStorage.setItem('wwwHistory', JSON.stringify(history));
+
+    const btn = document.getElementById('log-btn');
+    btn.classList.add('success');
+    btn.textContent = '✓ WORKOUT SAVED';
+    setTimeout(() => {
+      btn.classList.remove('success');
+      btn.textContent = 'LOG WORKOUT';
+    }, 2000);
+
+    showToast(`Workout ${currentWorkout} logged — ${totalVolume.toLocaleString()} ${unit} total`);
+  }
+
+  function renderHistory() {
+    const history = JSON.parse(localStorage.getItem('wwwHistory') || '[]').reverse();
+    const container = document.getElementById('history-container');
+
+    document.getElementById('stat-sessions').textContent = history.length;
+    const totalVol = history.reduce((s, e) => s + (e.totalVolume || 0), 0);
+    document.getElementById('stat-volume').textContent = totalVol > 9999
+      ? Math.round(totalVol/1000) + 'K'
+      : totalVol.toLocaleString();
+
+    // streak calc
+    let streak = 0;
+    const today = new Date(); today.setHours(0,0,0,0);
+    const days = new Set(history.map(e => {
+      const d = new Date(e.date); d.setHours(0,0,0,0); return d.getTime();
+    }));
+    let check = new Date(today);
+    while (days.has(check.getTime())) {
+      streak++;
+      check.setDate(check.getDate() - 1);
+    }
+    document.getElementById('stat-streak').textContent = streak;
+
+    if (history.length === 0) {
+      container.innerHTML = `<div class="history-empty">
+        <span class="empty-icon">🏋️</span>
+        No sessions logged yet.<br>Complete your first workout above!
+      </div>`;
+      return;
+    }
+
+    container.innerHTML = history.map(e => {
+      const d = new Date(e.date);
+      const dateStr = d.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+      const timeStr = d.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+      const exRows = e.exercises.map(ex =>
+        `<div class="he-ex-row">
+          <span>${ex.name}</span>
+          <span>${ex.sets || '—'}×${ex.reps || '—'} @ ${ex.weight || 0}${ex.unit}</span>
+        </div>`
+      ).join('');
+      return `
+        <div class="history-entry" onclick="this.classList.toggle('expanded')">
+          <div class="history-entry-header">
+            <div>
+              <div class="he-workout">WORKOUT ${e.workout}</div>
+              <div class="he-volume">Volume: ${(e.totalVolume||0).toLocaleString()} ${e.unit}</div>
+            </div>
+            <div class="he-date">${dateStr}<br>${timeStr}</div>
+          </div>
+          <div class="he-exercises">${exRows}</div>
+        </div>`;
+    }).join('');
+  }
+
+  function clearHistory() {
+    if (confirm('Clear all session history?')) {
+      localStorage.removeItem('wwwHistory');
+      renderHistory();
+      showToast('History cleared');
+    }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(`tab-${tab}`).classList.add('active');
+    event.target.classList.add('active');
+    if (tab === 'history') renderHistory();
+  }
+
+  // Init
+  renderExercises();
+</script>
+</body>
+</html>
