@@ -19,462 +19,286 @@
     --green: #47ff8a;
     --orange: #ff8f47;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; overflow-x: hidden;
   }
-
-  /* GRAIN OVERLAY */
   body::before {
-    content: '';
-    position: fixed; inset: 0;
+    content: ''; position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
     pointer-events: none; z-index: 9999; opacity: 0.4;
   }
-
   header {
     padding: 24px 20px 0;
     border-bottom: 1px solid var(--border);
     background: var(--surface);
     position: sticky; top: 0; z-index: 100;
   }
-
-  .header-top {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 16px;
-  }
-
+  .header-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; gap: 12px; }
   h1 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(28px, 7vw, 48px);
-    letter-spacing: 3px;
-    color: var(--accent);
-    line-height: 1;
+    letter-spacing: 3px; color: var(--accent); line-height: 1;
   }
-
   .week-badge {
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted2);
+    font-size: 11px; color: var(--muted2);
     background: var(--border);
-    padding: 4px 8px;
-    border-radius: 4px;
-    letter-spacing: 1px;
+    padding: 4px 8px; border-radius: 4px; letter-spacing: 1px;
+    display: inline-block; margin-top: 4px;
   }
-
-  /* TABS */
-  .tabs {
-    display: flex; gap: 0;
+  .auth-bar { display: flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; font-size: 10px; }
+  .auth-status { color: var(--muted2); letter-spacing: 0.5px; }
+  .auth-status.synced { color: var(--green); }
+  .auth-status.syncing { color: var(--orange); }
+  .auth-status.error { color: var(--accent2); }
+  .btn-auth {
+    padding: 6px 10px;
+    background: var(--accent); color: #000;
+    border: none; border-radius: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 1px;
+    cursor: pointer; font-weight: 500;
   }
-
+  .btn-auth.logout { background: var(--border); color: var(--muted2); }
+  .tabs { display: flex; gap: 0; }
   .tab-btn {
-    flex: 1;
-    padding: 10px 0;
-    background: none; border: none;
-    color: var(--muted2);
+    flex: 1; padding: 10px 0;
+    background: none; border: none; color: var(--muted2);
     font-family: 'DM Mono', monospace;
     font-size: 11px; letter-spacing: 1.5px;
-    text-transform: uppercase;
-    cursor: pointer;
+    text-transform: uppercase; cursor: pointer;
     border-bottom: 2px solid transparent;
     transition: all 0.2s;
   }
-
-  .tab-btn.active {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-  }
-
-  /* MAIN */
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
   main { padding: 20px; max-width: 600px; margin: 0 auto; }
-
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
-
-  /* WORKOUT SELECTOR */
-  .workout-selector {
-    display: grid; grid-template-columns: repeat(3,1fr); gap: 8px;
-    margin-bottom: 20px;
-  }
-
+  .workout-selector { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 20px; }
   .workout-btn {
     padding: 12px 8px;
     background: var(--surface2);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--muted2);
+    border-radius: 8px; color: var(--muted2);
     font-family: 'Bebas Neue', sans-serif;
     font-size: 22px; letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.15s;
-    text-align: center;
+    cursor: pointer; transition: all 0.15s; text-align: center;
   }
-
   .workout-btn small {
-    display: block;
-    font-family: 'DM Sans', sans-serif;
+    display: block; font-family: 'DM Sans', sans-serif;
     font-size: 10px; letter-spacing: 0.5px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 2px;
-    font-weight: 400;
+    text-transform: uppercase; color: var(--muted);
+    margin-top: 2px; font-weight: 400;
   }
-
-  .workout-btn.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #000;
-  }
-
+  .workout-btn.active { background: var(--accent); border-color: var(--accent); color: #000; }
   .workout-btn.active small { color: #333; }
-
-  /* EXERCISE CARD */
   .exercise-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px;
-    margin-bottom: 10px;
-    position: relative;
-    overflow: hidden;
+    border-radius: 10px; padding: 16px;
+    margin-bottom: 10px; position: relative; overflow: hidden;
   }
-
   .exercise-card::before {
-    content: '';
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--accent);
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--accent);
   }
-
   .exercise-name {
     font-family: 'DM Mono', monospace;
     font-size: 13px; letter-spacing: 0.5px;
-    color: var(--text);
-    margin-bottom: 4px;
-    text-transform: uppercase;
+    color: var(--text); margin-bottom: 4px; text-transform: uppercase;
   }
-
   .overload-hint {
-    font-size: 11px;
-    color: var(--green);
+    font-size: 11px; color: var(--green);
     margin-bottom: 10px;
     display: flex; align-items: center; gap: 5px;
     font-family: 'DM Mono', monospace;
   }
-
   .overload-hint::before { content: '↑'; font-size: 13px; }
-
-  .inputs-row {
-    display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 8px;
-  }
-
+  .inputs-row { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 8px; }
   .input-group label {
     font-size: 9px; letter-spacing: 1.5px;
     text-transform: uppercase; color: var(--muted2);
     display: block; margin-bottom: 4px;
     font-family: 'DM Mono', monospace;
   }
-
   .input-group input {
-    width: 100%;
-    padding: 8px 10px;
+    width: 100%; padding: 8px 10px;
     background: var(--surface2);
     border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--text);
+    border-radius: 6px; color: var(--text);
     font-family: 'DM Mono', monospace;
-    font-size: 16px;
-    text-align: center;
-    transition: border-color 0.15s;
-    -webkit-appearance: none;
+    font-size: 16px; text-align: center;
+    transition: border-color 0.15s; -webkit-appearance: none;
   }
-
-  .input-group input:focus {
-    outline: none;
-    border-color: var(--accent);
-  }
-
-  /* TIMER */
+  .input-group input:focus { outline: none; border-color: var(--accent); }
   .timer-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
+    border-radius: 10px; padding: 20px;
     margin-bottom: 20px;
     display: flex; align-items: center; justify-content: space-between;
   }
-
   .timer-display {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 52px;
-    line-height: 1;
-    color: var(--accent);
-    letter-spacing: 4px;
+    font-size: 52px; line-height: 1;
+    color: var(--accent); letter-spacing: 4px;
     transition: color 0.3s;
   }
-
   .timer-display.urgent { color: var(--accent2); }
-
   .timer-label {
     font-size: 10px; letter-spacing: 2px;
     color: var(--muted2); text-transform: uppercase;
-    font-family: 'DM Mono', monospace;
-    margin-top: 4px;
+    font-family: 'DM Mono', monospace; margin-top: 4px;
   }
-
   .timer-controls { display: flex; gap: 8px; }
-
   .btn-timer {
-    padding: 10px 18px;
-    border: none; border-radius: 8px;
-    cursor: pointer;
-    font-family: 'DM Mono', monospace;
+    padding: 10px 18px; border: none; border-radius: 8px;
+    cursor: pointer; font-family: 'DM Mono', monospace;
     font-size: 11px; letter-spacing: 1px;
-    font-weight: 500;
-    transition: all 0.15s;
+    font-weight: 500; transition: all 0.15s;
   }
-
-  .btn-timer-start {
-    background: var(--accent);
-    color: #000;
-  }
-
+  .btn-timer-start { background: var(--accent); color: #000; }
   .btn-timer-start:active { transform: scale(0.96); }
-
-  .btn-timer-reset {
-    background: var(--border);
-    color: var(--muted2);
-  }
-
-  /* PROGRESS BAR */
+  .btn-timer-reset { background: var(--border); color: var(--muted2); }
   .timer-progress {
-    height: 3px;
-    background: var(--border);
-    border-radius: 2px;
-    margin-bottom: 20px;
-    overflow: hidden;
+    height: 3px; background: var(--border);
+    border-radius: 2px; margin-bottom: 20px; overflow: hidden;
   }
-
   .timer-progress-fill {
-    height: 100%;
-    background: var(--accent);
+    height: 100%; background: var(--accent);
     border-radius: 2px;
     transition: width 1s linear, background 0.3s;
     width: 100%;
   }
-
-  /* LOG BUTTON */
   .btn-log {
-    width: 100%;
-    padding: 16px;
+    width: 100%; padding: 16px;
     background: var(--accent);
     border: none; border-radius: 10px;
-    color: #000;
-    font-family: 'Bebas Neue', sans-serif;
+    color: #000; font-family: 'Bebas Neue', sans-serif;
     font-size: 22px; letter-spacing: 3px;
-    cursor: pointer;
-    margin-top: 16px;
-    transition: all 0.15s;
-    position: relative;
-    overflow: hidden;
+    cursor: pointer; margin-top: 16px;
+    transition: all 0.15s; position: relative; overflow: hidden;
   }
-
   .btn-log:active { transform: scale(0.98); }
   .btn-log:disabled { opacity: 0.4; cursor: not-allowed; }
-
-  .btn-log.success {
-    background: var(--green);
-  }
-
-  /* HISTORY */
+  .btn-log.success { background: var(--green); }
   .history-header {
     display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 16px;
   }
-
   .history-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 28px; letter-spacing: 2px; color: var(--accent);
   }
-
   .btn-clear {
-    padding: 6px 12px;
-    background: none;
+    padding: 6px 12px; background: none;
     border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--muted2);
+    border-radius: 6px; color: var(--muted2);
     font-size: 11px; cursor: pointer;
     font-family: 'DM Mono', monospace;
-    letter-spacing: 0.5px;
-    transition: all 0.15s;
+    letter-spacing: 0.5px; transition: all 0.15s;
   }
-
   .btn-clear:hover { border-color: var(--accent2); color: var(--accent2); }
-
   .history-empty {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--muted);
-    font-family: 'DM Mono', monospace;
+    text-align: center; padding: 60px 20px;
+    color: var(--muted); font-family: 'DM Mono', monospace;
     font-size: 12px; letter-spacing: 1px;
   }
-
-  .history-empty .empty-icon {
-    font-size: 40px; margin-bottom: 12px; display: block;
-  }
-
+  .history-empty .empty-icon { font-size: 40px; margin-bottom: 12px; display: block; }
   .history-entry {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 8px;
-    cursor: pointer;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px;
+    margin-bottom: 8px; cursor: pointer;
     transition: border-color 0.15s;
   }
-
   .history-entry:hover { border-color: var(--muted); }
-
   .history-entry-header {
     display: flex; justify-content: space-between; align-items: flex-start;
     margin-bottom: 8px;
   }
-
   .he-workout {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px; letter-spacing: 2px;
-    color: var(--accent);
+    font-size: 24px; letter-spacing: 2px; color: var(--accent);
   }
-
   .he-date {
     font-family: 'DM Mono', monospace;
     font-size: 10px; color: var(--muted2);
-    letter-spacing: 0.5px;
-    text-align: right;
+    letter-spacing: 0.5px; text-align: right;
   }
-
   .he-volume {
     font-family: 'DM Mono', monospace;
-    font-size: 12px; color: var(--green);
-    letter-spacing: 0.5px;
+    font-size: 12px; color: var(--green); letter-spacing: 0.5px;
   }
-
   .he-exercises {
-    margin-top: 8px;
-    display: none;
-    border-top: 1px solid var(--border);
-    padding-top: 10px;
+    margin-top: 8px; display: none;
+    border-top: 1px solid var(--border); padding-top: 10px;
   }
-
   .history-entry.expanded .he-exercises { display: block; }
-
   .he-ex-row {
     display: flex; justify-content: space-between;
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted2);
-    padding: 3px 0;
+    font-size: 11px; color: var(--muted2); padding: 3px 0;
   }
-
   .he-ex-row span:last-child { color: var(--text); }
-
-  /* STATS ROW */
   .stats-row {
     display: grid; grid-template-columns: 1fr 1fr 1fr;
     gap: 8px; margin-bottom: 20px;
   }
-
   .stat-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px;
-    text-align: center;
+    border-radius: 8px; padding: 12px; text-align: center;
   }
-
   .stat-value {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px; letter-spacing: 2px;
-    color: var(--accent);
+    font-size: 28px; letter-spacing: 2px; color: var(--accent);
   }
-
   .stat-label {
     font-family: 'DM Mono', monospace;
     font-size: 9px; letter-spacing: 1px;
-    color: var(--muted2); text-transform: uppercase;
-    margin-top: 2px;
+    color: var(--muted2); text-transform: uppercase; margin-top: 2px;
   }
-
-  /* SECTION LABEL */
   .section-label {
     font-family: 'DM Mono', monospace;
     font-size: 10px; letter-spacing: 2px;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    margin-top: 20px;
+    color: var(--muted); text-transform: uppercase;
+    margin-bottom: 10px; margin-top: 20px;
     display: flex; align-items: center; gap: 8px;
   }
-
-  .section-label::after {
-    content: '';
-    flex: 1; height: 1px;
-    background: var(--border);
-  }
-
-  /* UNIT TOGGLE */
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
   .unit-toggle {
     display: flex; align-items: center; gap: 8px;
     font-family: 'DM Mono', monospace;
     font-size: 11px; color: var(--muted2);
   }
-
   .toggle-switch {
     width: 40px; height: 22px;
     background: var(--border);
-    border-radius: 11px;
-    position: relative; cursor: pointer;
-    transition: background 0.2s;
-    border: none;
-    flex-shrink: 0;
+    border-radius: 11px; position: relative;
+    cursor: pointer; transition: background 0.2s;
+    border: none; flex-shrink: 0;
   }
-
   .toggle-switch.on { background: var(--accent); }
-
   .toggle-knob {
-    position: absolute;
-    width: 16px; height: 16px;
-    background: #fff;
-    border-radius: 50%;
-    top: 3px; left: 3px;
-    transition: left 0.2s;
+    position: absolute; width: 16px; height: 16px;
+    background: #fff; border-radius: 50%;
+    top: 3px; left: 3px; transition: left 0.2s;
   }
-
   .toggle-switch.on .toggle-knob { left: 21px; }
-
-  /* TOAST */
   .toast {
     position: fixed; bottom: 24px; left: 50%;
     transform: translateX(-50%) translateY(80px);
-    background: var(--green);
-    color: #000;
+    background: var(--green); color: #000;
     font-family: 'DM Mono', monospace;
     font-size: 12px; letter-spacing: 1px;
-    padding: 12px 24px;
-    border-radius: 100px;
+    padding: 12px 24px; border-radius: 100px;
     transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    z-index: 1000;
-    white-space: nowrap;
+    z-index: 1000; white-space: nowrap;
   }
-
   .toast.show { transform: translateX(-50%) translateY(0); }
-
   @media (max-width: 400px) {
     .inputs-row { grid-template-columns: 1fr 1fr 1fr; gap: 5px; }
     .input-group input { font-size: 14px; padding: 7px 5px; }
@@ -489,12 +313,18 @@
       <h1>WORK WEEK WARRIOR</h1>
       <div class="week-badge">5-DAY DUMBBELL PROGRAM</div>
     </div>
-    <div class="unit-toggle">
-      <span id="unit-label">KG</span>
-      <button class="toggle-switch" id="unit-toggle" onclick="toggleUnit()">
-        <div class="toggle-knob"></div>
-      </button>
-      <span>LBS</span>
+    <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+      <div class="auth-bar">
+        <span class="auth-status" id="auth-status">Not signed in</span>
+        <button class="btn-auth" id="auth-btn" onclick="handleAuth()">SIGN IN</button>
+      </div>
+      <div class="unit-toggle">
+        <span id="unit-label">KG</span>
+        <button class="toggle-switch" id="unit-toggle" onclick="toggleUnit()">
+          <div class="toggle-knob"></div>
+        </button>
+        <span>LBS</span>
+      </div>
     </div>
   </div>
   <div class="tabs">
@@ -504,20 +334,12 @@
 </header>
 
 <main>
-  <!-- TRACKER TAB -->
   <div id="tab-tracker" class="tab-panel active">
-
     <div class="section-label" style="margin-top:16px">Select Workout</div>
     <div class="workout-selector">
-      <button class="workout-btn active" onclick="selectWorkout('A',this)">
-        A<small>Push + Legs</small>
-      </button>
-      <button class="workout-btn" onclick="selectWorkout('B',this)">
-        B<small>Pull + Core</small>
-      </button>
-      <button class="workout-btn" onclick="selectWorkout('C',this)">
-        C<small>Full Body</small>
-      </button>
+      <button class="workout-btn active" onclick="selectWorkout('A',this)">A<small>Heavy Hitters</small></button>
+      <button class="workout-btn" onclick="selectWorkout('B',this)">B<small>The Burn</small></button>
+      <button class="workout-btn" onclick="selectWorkout('C',this)">C<small>Athletic & Core</small></button>
     </div>
 
     <div class="section-label">Rest Timer</div>
@@ -537,24 +359,13 @@
     <div id="exercises-container"></div>
 
     <button class="btn-log" id="log-btn" onclick="logWorkout()">LOG WORKOUT</button>
-
   </div>
 
-  <!-- HISTORY TAB -->
   <div id="tab-history" class="tab-panel">
     <div class="stats-row" id="stats-row">
-      <div class="stat-card">
-        <div class="stat-value" id="stat-sessions">0</div>
-        <div class="stat-label">Sessions</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value" id="stat-volume">0</div>
-        <div class="stat-label">Total Vol</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value" id="stat-streak">0</div>
-        <div class="stat-label">Streak</div>
-      </div>
+      <div class="stat-card"><div class="stat-value" id="stat-sessions">0</div><div class="stat-label">Sessions</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-volume">0</div><div class="stat-label">Total Vol</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-streak">0</div><div class="stat-label">Streak</div></div>
     </div>
     <div class="history-header">
       <div class="history-title">SESSION LOG</div>
@@ -566,39 +377,59 @@
 
 <div class="toast" id="toast"></div>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBQi7EROAFJjz-QO1IvPVjpwsGmn02r8uo",
+    authDomain: "workout-97a94.firebaseapp.com",
+    projectId: "workout-97a94",
+    storageBucket: "workout-97a94.firebasestorage.app",
+    messagingSenderId: "176695536153",
+    appId: "1:176695536153:web:46a18e252aa4eda1735888"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const provider = new GoogleAuthProvider();
+
+  window.fb = { auth, db, provider, signInWithPopup, signOut, onAuthStateChanged, doc, setDoc, getDoc };
+  window.dispatchEvent(new Event('fb-ready'));
+</script>
+
 <script>
   const WORKOUTS = {
     A: {
-      name: 'Push + Legs',
+      name: 'Heavy Hitters',
       exercises: [
-        'Goblet Squat',
-        'Floor Press',
-        'Romanian Deadlift',
-        'Dumbbell Lunge',
-        'Lateral Raise',
-        'Tricep Kickback'
+        'Goblet Squat (4×10-12, slow 3s descent)',
+        'Floor Press (4×10-12)',
+        'Romanian Deadlift (4×12)',
+        'Single-Arm Row (3×10/side)',
+        'Dumbbell Shrug (3×15)'
       ]
     },
     B: {
-      name: 'Pull + Core',
+      name: 'The Burn',
       exercises: [
-        'Dumbbell Row',
-        'Bicep Curl',
-        'Renegade Row',
-        'Hammer Curl',
-        'Dumbbell Deadlift',
-        'Russian Twist'
+        'Alt. Reverse Lunge (3×12/leg)',
+        'Overhead Press (3×12-15)',
+        'Curl + Overhead Tricep Ext. (3×10)',
+        'Lateral Raise (3×15, strict)',
+        'Weighted Glute Bridge (3×20)'
       ]
     },
     C: {
-      name: 'Full Body',
+      name: 'Athletic & Core',
       exercises: [
-        'Dumbbell Thruster',
-        'Sumo Squat',
-        'Arnold Press',
-        'Bent-Over Row',
-        'Dumbbell Swing',
-        'Farmers Carry (30s)'
+        'Thruster (3×12)',
+        'Renegade Row (3×10/side, no push-up)',
+        'Farmers Carry (3×45s)',
+        'Sumo Squat (3×15)',
+        'Weighted Dead Bug (3×10/side)'
       ]
     }
   };
@@ -608,13 +439,90 @@
   let timerSeconds = 45;
   let timerRunning = false;
   let useKg = true;
+  let currentUser = null;
+  let history = [];
 
+  // ========== AUTH + SYNC ==========
+  window.addEventListener('fb-ready', () => {
+    window.fb.onAuthStateChanged(window.fb.auth, async (user) => {
+      currentUser = user;
+      const btn = document.getElementById('auth-btn');
+      if (user) {
+        setSyncStatus('synced', `${user.displayName?.split(' ')[0] || 'Signed in'} ✓`);
+        btn.textContent = 'SIGN OUT';
+        btn.classList.add('logout');
+        await loadFromCloud();
+      } else {
+        setSyncStatus('', 'Not signed in');
+        btn.textContent = 'SIGN IN';
+        btn.classList.remove('logout');
+        history = JSON.parse(localStorage.getItem('wwwHistory') || '[]');
+        renderExercises();
+        if (document.getElementById('tab-history').classList.contains('active')) renderHistory();
+      }
+    });
+  });
+
+  async function handleAuth() {
+    if (!window.fb) { showToast('Firebase loading…'); return; }
+    if (currentUser) {
+      await window.fb.signOut(window.fb.auth);
+    } else {
+      try {
+        await window.fb.signInWithPopup(window.fb.auth, window.fb.provider);
+      } catch (e) {
+        console.error(e);
+        showToast('Sign-in failed: ' + (e.code || e.message));
+      }
+    }
+  }
+  window.handleAuth = handleAuth;
+
+  async function loadFromCloud() {
+    setSyncStatus('syncing', 'Syncing…');
+    try {
+      const ref = window.fb.doc(window.fb.db, 'users', currentUser.uid);
+      const snap = await window.fb.getDoc(ref);
+      if (snap.exists() && snap.data().history) {
+        history = snap.data().history;
+      } else {
+        history = JSON.parse(localStorage.getItem('wwwHistory') || '[]');
+        if (history.length) await saveToCloud();
+      }
+      localStorage.setItem('wwwHistory', JSON.stringify(history));
+      setSyncStatus('synced', `${currentUser.displayName?.split(' ')[0] || 'Signed in'} ✓`);
+      renderExercises();
+      if (document.getElementById('tab-history').classList.contains('active')) renderHistory();
+    } catch (e) {
+      console.error(e);
+      setSyncStatus('error', 'Sync error');
+    }
+  }
+
+  async function saveToCloud() {
+    if (!currentUser || !window.fb) return;
+    setSyncStatus('syncing', 'Saving…');
+    try {
+      const ref = window.fb.doc(window.fb.db, 'users', currentUser.uid);
+      await window.fb.setDoc(ref, { history, updatedAt: Date.now() });
+      setSyncStatus('synced', `${currentUser.displayName?.split(' ')[0] || 'Signed in'} ✓`);
+    } catch (e) {
+      console.error(e);
+      setSyncStatus('error', 'Save failed');
+    }
+  }
+
+  function setSyncStatus(cls, text) {
+    const status = document.getElementById('auth-status');
+    status.textContent = text;
+    status.className = 'auth-status ' + cls;
+  }
+
+  // ========== UI ==========
   function toggleUnit() {
     useKg = !useKg;
-    const toggle = document.getElementById('unit-toggle');
-    const label = document.getElementById('unit-label');
-    toggle.classList.toggle('on', !useKg);
-    label.textContent = useKg ? 'KG' : 'LBS';
+    document.getElementById('unit-toggle').classList.toggle('on', !useKg);
+    document.getElementById('unit-label').textContent = useKg ? 'KG' : 'LBS';
     renderExercises();
   }
 
@@ -626,7 +534,6 @@
   }
 
   function getLastSession(workoutKey, exerciseName) {
-    const history = JSON.parse(localStorage.getItem('wwwHistory') || '[]');
     for (let i = history.length - 1; i >= 0; i--) {
       if (history[i].workout === workoutKey) {
         const ex = history[i].exercises.find(e => e.name === exerciseName);
@@ -653,18 +560,9 @@
           <div class="exercise-name">${String(i+1).padStart(2,'0')}. ${name}</div>
           ${hint}
           <div class="inputs-row">
-            <div class="input-group">
-              <label>Sets</label>
-              <input type="number" id="sets_${i}" placeholder="3" min="1" max="10" inputmode="numeric">
-            </div>
-            <div class="input-group">
-              <label>Reps</label>
-              <input type="number" id="reps_${i}" placeholder="10" min="1" max="100" inputmode="numeric">
-            </div>
-            <div class="input-group">
-              <label>Weight (${unit})</label>
-              <input type="number" id="weight_${i}" placeholder="0" min="0" step="0.5" inputmode="decimal">
-            </div>
+            <div class="input-group"><label>Sets</label><input type="number" id="sets_${i}" placeholder="3" min="1" max="10" inputmode="numeric"></div>
+            <div class="input-group"><label>Reps</label><input type="number" id="reps_${i}" placeholder="10" min="1" max="100" inputmode="numeric"></div>
+            <div class="input-group"><label>Weight (${unit})</label><input type="number" id="weight_${i}" placeholder="0" min="0" step="0.5" inputmode="decimal"></div>
           </div>
         </div>`;
     }).join('');
@@ -715,7 +613,7 @@
     bar.style.background = timerSeconds <= 10 ? 'var(--accent2)' : 'var(--accent)';
   }
 
-  function logWorkout() {
+  async function logWorkout() {
     const exercises = WORKOUTS[currentWorkout].exercises;
     const unit = useKg ? 'KG' : 'LBS';
     const logged = [];
@@ -740,9 +638,9 @@
       unit
     };
 
-    const history = JSON.parse(localStorage.getItem('wwwHistory') || '[]');
     history.push(entry);
     localStorage.setItem('wwwHistory', JSON.stringify(history));
+    await saveToCloud();
 
     const btn = document.getElementById('log-btn');
     btn.classList.add('success');
@@ -756,19 +654,18 @@
   }
 
   function renderHistory() {
-    const history = JSON.parse(localStorage.getItem('wwwHistory') || '[]').reverse();
+    const reversed = [...history].reverse();
     const container = document.getElementById('history-container');
 
-    document.getElementById('stat-sessions').textContent = history.length;
-    const totalVol = history.reduce((s, e) => s + (e.totalVolume || 0), 0);
+    document.getElementById('stat-sessions').textContent = reversed.length;
+    const totalVol = reversed.reduce((s, e) => s + (e.totalVolume || 0), 0);
     document.getElementById('stat-volume').textContent = totalVol > 9999
       ? Math.round(totalVol/1000) + 'K'
       : totalVol.toLocaleString();
 
-    // streak calc
     let streak = 0;
     const today = new Date(); today.setHours(0,0,0,0);
-    const days = new Set(history.map(e => {
+    const days = new Set(reversed.map(e => {
       const d = new Date(e.date); d.setHours(0,0,0,0); return d.getTime();
     }));
     let check = new Date(today);
@@ -778,23 +675,17 @@
     }
     document.getElementById('stat-streak').textContent = streak;
 
-    if (history.length === 0) {
-      container.innerHTML = `<div class="history-empty">
-        <span class="empty-icon">🏋️</span>
-        No sessions logged yet.<br>Complete your first workout above!
-      </div>`;
+    if (reversed.length === 0) {
+      container.innerHTML = `<div class="history-empty"><span class="empty-icon">🏋️</span>No sessions logged yet.<br>Complete your first workout above!</div>`;
       return;
     }
 
-    container.innerHTML = history.map(e => {
+    container.innerHTML = reversed.map(e => {
       const d = new Date(e.date);
       const dateStr = d.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
       const timeStr = d.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
       const exRows = e.exercises.map(ex =>
-        `<div class="he-ex-row">
-          <span>${ex.name}</span>
-          <span>${ex.sets || '—'}×${ex.reps || '—'} @ ${ex.weight || 0}${ex.unit}</span>
-        </div>`
+        `<div class="he-ex-row"><span>${ex.name}</span><span>${ex.sets || '—'}×${ex.reps || '—'} @ ${ex.weight || 0}${ex.unit}</span></div>`
       ).join('');
       return `
         <div class="history-entry" onclick="this.classList.toggle('expanded')">
@@ -810,9 +701,11 @@
     }).join('');
   }
 
-  function clearHistory() {
-    if (confirm('Clear all session history?')) {
+  async function clearHistory() {
+    if (confirm('Clear all session history? This will also wipe cloud data.')) {
+      history = [];
       localStorage.removeItem('wwwHistory');
+      await saveToCloud();
       renderHistory();
       showToast('History cleared');
     }
@@ -833,7 +726,15 @@
     if (tab === 'history') renderHistory();
   }
 
-  // Init
+  window.toggleUnit = toggleUnit;
+  window.selectWorkout = selectWorkout;
+  window.toggleTimer = toggleTimer;
+  window.resetTimer = resetTimer;
+  window.logWorkout = logWorkout;
+  window.clearHistory = clearHistory;
+  window.switchTab = switchTab;
+
+  history = JSON.parse(localStorage.getItem('wwwHistory') || '[]');
   renderExercises();
 </script>
 </body>
