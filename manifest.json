@@ -1,0 +1,15 @@
+{
+  "name": "Work Week Warrior",
+  "short_name": "WWW",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d0d0f",
+  "theme_color": "#0d0d0f",
+  "icons": [{
+    "src": "https://em-content.zobj.net/source/google/412/flexed-biceps_1f4aa.png",
+    "sizes": "512x512",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }]
+}
